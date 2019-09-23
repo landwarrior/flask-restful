@@ -22,7 +22,7 @@ fi
 
 echo ""
 
-if [ ! "$(rpm -qa | grep python36u)" ]; then
+if [ ! "$(rpm -qa | grep python3)" ]; then
     # Python3系のリポジトリを追加する
     echo "add ius repo"
     yum install -y https://centos7.iuscommunity.org/ius-release.rpm
