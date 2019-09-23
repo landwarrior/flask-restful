@@ -39,25 +39,3 @@ fi
 # chef 実行(ライセンスへの同意を求められたら yes を入力してください)
 # それぞれのファイルはフルパスじゃないとちゃんと動かないようだ・・・
 sudo chef-solo -c /vagrant_data/chef-repo/solo.rb -j /vagrant_data/chef-repo/nodes/flask-restful.json
-
-echo "create database if not exists mydb"
-mysql -uroot -e"create database if not exists mydb default charset=utf8"
-echo "create user myaccount"
-mysql -uroot -e"grant all privileges on *.* to myaccount@'%' identified by 'myaccount' with grant option"
-echo "create table if not exists users"
-mysql -uroot -Dmydb -e"CREATE TABLE IF NOT EXISTS users (
-  user_id int(11) NOT NULL,
-  user_name varchar(32) NOT NULL,
-  group_id int(11) DEFAULT NULL,
-  ins_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  upd_date datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8"
-echo "create table if not exists groups"
-mysql -uroot -Dmydb -e"CREATE TABLE IF NOT EXISTS groups (
-  group_id int(11) NOT NULL,
-  group_name varchar(32) NOT NULL,
-  ins_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  upd_date datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (group_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8"

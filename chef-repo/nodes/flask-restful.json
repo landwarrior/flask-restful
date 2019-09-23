@@ -1,5 +1,6 @@
 {
     "run_list": [
-        "recipe[flask-restful]"
+        "recipe[flask-restful]",
+        "recipe[docker]"
     ]
 }
