@@ -32,7 +32,7 @@ OS：Windows 10 Pro バージョン 1903
     ```
 1. マウントしたディレクトリに移動する
     ```console
-    cd /vagrand_data
+    cd /vagrant_data
     ```
 1. シェルスクリプトを起動する
     ```console
