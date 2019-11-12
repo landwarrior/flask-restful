@@ -36,6 +36,7 @@ OS：Windows 10 Pro バージョン 1903
     ```
 1. シェルスクリプトを起動する
     ```console
+    sudo su
     ./provisioning.sh
     ```
 
