@@ -2,19 +2,13 @@
 
 set -e
 
-# とりあえずアップデートしておく
-echo "  - yum update"
-sudo yum update -y
-
-echo ""
-
 # とりあえず開発ツール関係を入れておく
 if ! rpm -qa | grep gcc | grep -v libgcc ; then
     echo "  - yum groupinstall \"Development Tools\""
     sudo yum groupinstall -y "Development Tools"
 fi
 
-# 保管してくれるやつ
+# 補完してくれるやつ
 if ! rpm -qa | grep bash-completion ; then
     echo "  - yum install bash-completion"
     sudo yum install -y bash-completion
