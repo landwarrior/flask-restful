@@ -38,6 +38,6 @@ cookbook_file "/#{Chef::Config[:file_cache_path]}/init.sql" do
     group 'root'
     action :create
 end
-execute 'create database if not exists mydb' do
+execute 'initializing mydb' do
     command "mysql -uroot -Dmydb < #{Chef::Config[:file_cache_path]}/init.sql"
 end

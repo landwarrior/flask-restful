@@ -1,30 +1,28 @@
 """Usersテーブルのクラス."""
-from models import db
+from models import Base, TableBase
+import sqlalchemy as sa
 
 
-class Users(db.Model):
+class Users(Base, TableBase):
     """users テーブル定義."""
 
     __tablename__ = 'users'
 
-    user_id = db.Column('user_id', db.Integer, primary_key=True)
-    user_name = db.Column('user_name', db.String(16))
-    age = db.Column('age', db.Integer)
-    sex = db.Column('sex', db.String(8))
+    user_id = sa.Column('user_id', sa.Integer, primary_key=True)
+    user_name = sa.Column('user_name', sa.String(16))
+    group_id = sa.Column('group_id', sa.Integer)
 
-    def __init__(self, user_id, user_name, age, sex):
+    def __init__(self, user_id, user_name, group_id):
         """コンストラクタ."""
         self.user_id = user_id
         self.user_name = user_name
-        self.age = age
-        self.sex = sex
+        self.group_id = group_id
 
     def __repr__(self):
         """なんかよく分からないけど、インサートするのに必要っぽい."""
-        return "<{}({}, {}, {}, {})>".format(
+        return "<{}({}, {}, {})>".format(
             self.__tablename__,
             self.user_id,
             self.user_name,
-            self.age,
-            self.sex,
+            self.group_id,
         )

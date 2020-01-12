@@ -1,35 +1,35 @@
-"""ユーザーのAPI.
+"""グループのAPI.
 
-/v1/users
+/v1/groups
 """
 from flask_restful import Resource
 from flask import request
 from sqlalchemy.orm.exc import NoResultFound
 
-from models.Users import Users as Users_DB
+from models.Groups import Groups as Groups_DB
 from libs.Response import error_response
 
 
-class Users(Resource):
+class Groups(Resource):
     """ユーザー情報を取得・更新する."""
 
     @error_response
-    def get(self, user_id=None):
+    def get(self, group_id=None):
         """データ取得."""
-        if user_id:
-            conditions = {'user_id': user_id}
+        if group_id:
+            conditions = {'group_id': group_id}
         else:
             conditions = {}
-        user_data = Users_DB.selects(conditions)
-        return {'code': 200, 'user_data': user_data}
+        group_data = Groups_DB.selects(conditions)
+        return {'code': 200, 'group_data': group_data}
 
     @error_response
-    def put(self, user_id=None):
+    def put(self, group_id=None):
         """データ登録."""
-        if user_id:
-            return ({'code': 400, 'message': 'can not set user_id'}, 400)
+        if group_id:
+            return ({'code': 400, 'message': 'can not set group_id'}, 400)
         j_data = request.json
-        must_keys = ['user_name', 'group_id']
+        must_keys = ['group_name']
         for key in must_keys:
             if key not in j_data.keys():
                 return ({
@@ -38,38 +38,33 @@ class Users(Resource):
                 }, 400)
 
         ins_data = {
-            'user_id': j_data.get('user_id', None),
-            'user_name': j_data.get('user_name'),
-            'group_id': j_data.get('group_id'),
+            'group_id': j_data.get('group_id', None),
+            'group_name': j_data.get('group_name'),
         }
-        Users_DB.inserts([ins_data])
+        Groups_DB.inserts([ins_data])
         return {'code': 200, 'message': 'ok'}
 
     @error_response
-    def post(self, user_id=None):
+    def post(self, group_id=None):
         """データ更新."""
-        if not user_id:
+        if not group_id:
             return ({'code': 404, 'message': 'no target data'}, 404)
         j_data = request.json
         try:
-            upd_data = {}
-            if j_data.get('user_name'):
-                upd_data['user_name'] = j_data.get('user_name')
-            if j_data.get('group_id'):
-                upd_data['group_id'] = j_data.get('group_id')
-
-            Users_DB.update({'user_id': user_id}, upd_data)
+            Groups_DB.update({'group_id': group_id}, {
+                'group_name': j_data.get('group_name')
+            })
         except NoResultFound:
             return ({'code': 404, 'message': 'no target data'}, 404)
         return {'code': 200, 'message': 'ok'}
 
     @error_response
-    def delete(self, user_id=None):
+    def delete(self, group_id=None):
         """データ削除."""
-        if not user_id:
+        if not group_id:
             return ({'code': 404, 'message': 'no target data'}, 404)
         try:
-            Users_DB.delete({'user_id': user_id})
+            Groups_DB.delete({'group_id': group_id})
         except NoResultFound:
             return ({'code': 404, 'message': 'no target data'}, 404)
         return {'code': 200, 'message': 'ok'}

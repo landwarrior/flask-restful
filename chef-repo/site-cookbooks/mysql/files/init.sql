@@ -2,7 +2,7 @@ grant all privileges on *.* to myaccount@'%' identified by 'myaccount' with gran
 grant all privileges on *.* to myaccount@localhost identified by 'myaccount' with grant option;
 
 CREATE TABLE IF NOT EXISTS users (
-  user_id int(11) NOT NULL,
+  user_id int(11) NOT NULL AUTO_INCREMENT,
   user_name varchar(32) NOT NULL,
   group_id int(11) DEFAULT NULL,
   ins_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS groups (
-  group_id int(11) NOT NULL,
+  group_id int(11) NOT NULL AUTO_INCREMENT,
   group_name varchar(32) NOT NULL,
   ins_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   upd_date datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

@@ -1,8 +1,14 @@
 """オリジナルロガー."""
 import logging
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
-class MyLogger:
+formatter = logging.Formatter(
+    '%(asctime)s [%(levelname)07s][%(process)d] - %(message)s [%(filename)s:%(lineno)d]'
+)
 
-    def __init__(self):
-        self.logger = logging()
+stream = logging.StreamHandler()
+stream.setFormatter(formatter)
+
+logger.addHandler(stream)

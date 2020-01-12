@@ -6,12 +6,12 @@ networks:
 
 services:
     flask:
-        image: flask
+        image: flask:latest
         deploy:
             mode: global
 
     nginx:
-        image: nginx
+        image: mynginx:latest
         ports:
             - 80:80
         deploy:

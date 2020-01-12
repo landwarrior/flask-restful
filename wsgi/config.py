@@ -18,9 +18,9 @@ class DevConfig(BaseConfig):
     """開発環境用."""
 
     DB_URI = '''\
-mysql+pymysql: // {user}: {password}@{host}/{db}?charset = utf8'''.format(
+mysql+pymysql://{user}:{password}@{host}/{db}?charset=utf8'''.format(
         user='myaccount',
         password='myaccount',
-        host='192.168.33.10',
+        host='192.168.33.20',  # TODO: mysql がインストールされているホストに合わせる
         db='mydb'
     )

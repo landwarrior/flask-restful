@@ -30,9 +30,9 @@ if  ! rpm -qa | grep python3 ; then
     # Python3系のリポジトリを追加する
     echo "  - add ius repo"
     yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-    echo "  - install python36"
+    echo "  - install python3"
     yum install -y python3 python3-libs python3-devel python3-pip
-    echo "  - pip install"
+    echo "  - install python modules"
     pip3.6 install -r "$SCRIPT_DIR/docker/flask/requirements.txt"
 else
     echo "  * skip installing python3"
@@ -42,7 +42,7 @@ echo ""
 
 # chef 実行(ライセンスへの同意を求められたら yes を入力してください)
 # それぞれのファイルはフルパスじゃないとちゃんと動かないようだ・・・
-sudo chef-client -z -c /vagrant_data/chef-repo/solo.rb -j /vagrant_data/chef-repo/nodes/flask-restful.json
+sudo chef-client -z -c /vagrant_data/chef-repo/solo.rb -j /vagrant_data/chef-repo/nodes/docker_server.json
 
 # ここからは docker 用の準備
 
@@ -53,12 +53,8 @@ echo "  - copy docker files"
 cp -fr "$SCRIPT_DIR/docker" /var/app/
 
 echo "  - docker build"
-docker build -t flask /var/app/docker/flask
-docker build -t nginx /var/app/docker/nginx
+docker build -t flask /var/app/docker/flask/
+docker build -t mynginx /var/app/docker/nginx/
 
-if ! docker node ls -q ; then
-    echo "  - docker swarm init"
-    docker swarm init --advertise-addr 192.168.33.10
-else
-    echo "  * skip docker swarm init"
-fi
+# primary の方で以下のコマンドを実行して docker swarm join するコマンドを得る
+# docker swarm join-token worker
