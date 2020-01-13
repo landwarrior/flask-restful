@@ -61,3 +61,4 @@ Docker Swarm での構築のサンプルのため、 VM は合計 3 台必要で
     - mysql-server の場合、以下
     ```console
     sudo /vagrant_data/provisioning_db.sh
+    ```
