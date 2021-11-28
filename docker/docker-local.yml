@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.9"
 
 networks:
     default:
@@ -8,7 +8,8 @@ services:
     flask:
         image: flask:latest
         deploy:
-            mode: global
+            mode: replicated
+            replicas: 2
 
     nginx:
         image: mynginx:latest

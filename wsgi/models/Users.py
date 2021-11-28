@@ -6,7 +6,7 @@ import sqlalchemy as sa
 class Users(Base, TableBase):
     """users テーブル定義."""
 
-    __tablename__ = 'users'
+    __tablename__ = 'mst_users'
 
     user_id = sa.Column('user_id', sa.Integer, primary_key=True)
     user_name = sa.Column('user_name', sa.String(16))

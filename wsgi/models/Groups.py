@@ -6,7 +6,7 @@ import sqlalchemy as sa
 class Groups(Base, TableBase):
     """groups テーブル定義."""
 
-    __tablename__ = 'groups'
+    __tablename__ = 'mst_groups'
 
     group_id = sa.Column('group_id', sa.Integer, primary_key=True)
     group_name = sa.Column('group_name', sa.String(32))

@@ -4,7 +4,7 @@
     device-mapper-persistent-data
     lvm2
 ].each do |pkg|
-    yum_package pkg do
+    dnf_package pkg do
         action :install
     end
 end
@@ -19,8 +19,8 @@ end
     docker-ce-cli
     containerd.io
 ].each do |docker|
-    yum_package docker do
-        options "--enablerepo=docker-ce-edge"
+    dnf_package docker do
+        options "--enablerepo=docker-ce-stable"
         action :install
     end
 end
