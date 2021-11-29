@@ -9,7 +9,9 @@ services:
         image: flask:latest
         deploy:
             mode: replicated
-            replicas: 2
+            replicas: 4
+            placement:
+                max_replicas_per_node: 2
 
     nginx:
         image: mynginx:latest
