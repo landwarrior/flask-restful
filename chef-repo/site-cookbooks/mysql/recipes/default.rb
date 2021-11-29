@@ -3,8 +3,16 @@ package 'mysql-server' do
     action :install
 end
 
-template '/etc/my.cnf' do
-    source 'my.cnf.erb'
+template '/etc/my.cnf.d/mysql-server.cnf' do
+    source 'mysql-server.cnf.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    action :create
+end
+
+template '/etc/my.cnf.d/client.cnf' do
+    source 'client.cnf.erb'
     owner 'root'
     group 'root'
     mode '0644'
